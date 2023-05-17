@@ -1,0 +1,26 @@
+{
+  "name": "feedapp",
+  "version": "1.0.0",
+  "description": "This FeedApp is assignment for Adobe company",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravi-bala13/FeedApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ravi-bala13/FeedApp/issues"
+  },
+  "homepage": "https://github.com/ravi-bala13/FeedApp#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3"
+  }
+}
