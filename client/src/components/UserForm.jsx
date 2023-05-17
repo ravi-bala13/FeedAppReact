@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-const UserForm = () => {
+const UserForm = ({ isLogin }) => {
   const [formDetails, setFormDetails] = useState({
     email: "",
-    name: "",
-    bio: "",
+    password: "",
   });
-
-  const backendUrl = "https://feedapp.onrender.com/";
-
   console.log("formDetails", formDetails);
+
+  const backendUrl = "https://feedappreact.onrender.com/";
 
   const onChange = (e) => {
     setFormDetails({ ...formDetails, [e.target.name]: e.target.value });
@@ -20,36 +18,36 @@ const UserForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     let formValues = { ...formDetails };
-    console.log("formValues", formValues);
     try {
+      let url = backendUrl + (isLogin ? "login" : "signup");
       axios
-        .post(backendUrl + "users", formValues)
-        .then((res) => console.log("Response", res));
+        .post(url, formValues)
+        .then((res) => {
+          console.log("Response", res);
+          alert(res.data.message);
+        })
+        .catch((error) => {
+          let message = error.response.data.message;
+          let errors = error.response.data.errors;
+          if (errors != null && errors.length > 0) {
+            alert("Invalid Email or Password");
+          } else if (message) {
+            alert(message);
+          }
+        });
     } catch (error) {
       console.log("Error in handleSubmit", error);
     }
-    alert("user created successfully");
     setFormDetails({
       email: "",
-      name: "",
-      bio: "",
+      password: "",
     });
   };
 
   return (
     <div className="container-box">
       <Form onSubmit={handleSubmit}>
-        <h1>Create User</h1>
-        <Form.Group controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter name"
-            name="name"
-            value={formDetails.name}
-            onChange={onChange}
-          />
-        </Form.Group>
+        <h1>{isLogin ? "Login" : "Signup"}</h1>
 
         <Form.Group controlId="email">
           <Form.Label>Email</Form.Label>
@@ -61,15 +59,13 @@ const UserForm = () => {
             onChange={onChange}
           />
         </Form.Group>
-
-        <Form.Group controlId="bio">
-          <Form.Label>Bio</Form.Label>
+        <Form.Group controlId="password">
+          <Form.Label>Name</Form.Label>
           <Form.Control
-            as="textarea"
-            name="bio"
-            rows={3}
-            placeholder="Enter bio"
-            value={formDetails.bio}
+            type="text"
+            placeholder="Enter password"
+            name="password"
+            value={formDetails.password}
             onChange={onChange}
           />
         </Form.Group>

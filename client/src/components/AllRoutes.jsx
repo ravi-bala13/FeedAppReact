@@ -10,9 +10,9 @@ export default function AllRoutes() {
     <div>
       <Routes>
         <Route path="/userlist" element={<UsersList />} />
-        <Route path="/postlist" element={<PostsList />} />
-        <Route path="/userform" element={<UserForm />} />
-        <Route path="/postForm" element={<PostForm />} />
+        <Route path="/home" element={<PostsList />} />
+        <Route path="/login" element={<UserForm isLogin={true} />} />
+        <Route path="/signup" element={<UserForm isLogin={false} />} />
       </Routes>
     </div>
   );
