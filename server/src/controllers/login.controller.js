@@ -33,7 +33,7 @@ router.post(
 
     // Hash the password using bcrypt
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
+    const username = req.body.email.split("@")[0];
     // Create a new user instance and save it to the database
     const user = new User({
       email: req.body.email,
@@ -45,7 +45,12 @@ router.post(
     const token = jwt.sign({ userId: user._id }, secretKey);
     res
       .status(201)
-      .json({ message: "User created successfully", token, userId: user._id });
+      .json({
+        message: "User created successfully",
+        token,
+        userId: user._id,
+        username: username,
+      });
   }
 );
 
@@ -77,12 +82,17 @@ router.post(
     if (!passwordMatches) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-
+    const username = req.body.email.split("@")[0];
     // Generate a JWT token for the user and send it in the response
     const token = jwt.sign({ userId: user._id }, secretKey);
     res
       .status(200)
-      .json({ message: "Login successful", token, userId: user._id });
+      .json({
+        message: "Login successful",
+        token,
+        userId: user._id,
+        username: username,
+      });
   }
 );
 

@@ -21,8 +21,8 @@ function PostsList(props) {
 
   return (
     <div className="container-box long-box">
-      {posts.map((ele) => (
-        <div>
+      {posts.map((ele, i) => (
+        <div key={i}>
           <div className="post-box">ele.content</div>
           <div className="bottom-box">
             <span>Like</span>

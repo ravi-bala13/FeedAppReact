@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserId } from "../Redux/action";
+import { loadData, saveData } from "../utils/localStorage";
+import { redirect, useNavigate } from "react-router-dom";
 
 const UserForm = ({ isLogin }) => {
+  const navigate = useNavigate();
+
+  const state = useSelector((state) => state);
+  console.log("state:", state);
+  const dispatch = useDispatch();
+
+  const userId = loadData("userId");
+
   const [formDetails, setFormDetails] = useState({
     email: "",
     password: "",
@@ -25,6 +37,9 @@ const UserForm = ({ isLogin }) => {
         .then((res) => {
           console.log("Response", res);
           alert(res.data.message);
+          dispatch(setUserId(res.data.userId));
+          saveData("userId", res.data.userId);
+          saveData("username", res.data.username);
         })
         .catch((error) => {
           let message = error.response.data.message;
@@ -43,6 +58,11 @@ const UserForm = ({ isLogin }) => {
       password: "",
     });
   };
+
+  if (userId) {
+    alert("redirecting");
+    navigate("/home");
+  }
 
   return (
     <div className="container-box">

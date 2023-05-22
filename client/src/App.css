@@ -48,11 +48,9 @@
 }
 
 body {
-  background: linear-gradient(
-    90deg,
-    rgba(48, 16, 255, 1) 0%,
-    rgba(100, 115, 255, 1) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(48, 16, 255, 1) 0%,
+      rgba(100, 115, 255, 1) 100%);
 }
 
 .container-box {
@@ -68,14 +66,14 @@ body {
   padding: 30px;
 }
 
-.long-box{
+.long-box {
   height: 100vh;
   padding: 5px;
   color: yellow;
   overflow: scroll;
 }
 
-.post-box{
+.post-box {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -89,7 +87,7 @@ body {
   color: #161a2b;
 }
 
-.user-box{
+.user-box {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -109,11 +107,11 @@ h1 {
   font-size: 24px;
 }
 
-.submit-btn{
+.submit-btn {
   margin-top: 50px;
 }
 
-.bottom-box{
+.bottom-box {
   display: flex;
   justify-self: start;
   gap: 10px;
