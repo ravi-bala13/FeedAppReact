@@ -34,11 +34,16 @@ router.post(
     // Hash the password using bcrypt
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const username = req.body.email.split("@")[0];
+    const userrole = "USER";
+    if (username.startsWith("admin")) {
+      userrole = "ADMIN";
+    }
     // Create a new user instance and save it to the database
     const user = new User({
       email: req.body.email,
       password: hashedPassword,
       user_name: username,
+      role: userrole,
     });
     await user.save();
 
@@ -49,6 +54,7 @@ router.post(
       token,
       userId: user._id,
       username: username,
+      userrole: user.role,
     });
   }
 );
@@ -89,6 +95,7 @@ router.post(
       token,
       userId: user._id,
       username: user.user_name,
+      userrole: user.role,
     });
   }
 );

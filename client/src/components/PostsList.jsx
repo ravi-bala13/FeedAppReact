@@ -9,7 +9,7 @@ function PostsList(props) {
   const userId = useSelector((state) => state.userId);
   console.log("userId:", userId);
 
-  const backendUrl = "https://feedapp.onrender.com/";
+  const backendUrl = "https://feedappreact.onrender.com/";
   // const backendUrl = "http://localhost:8080/";
 
   useEffect(() => {

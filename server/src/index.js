@@ -8,9 +8,12 @@ app.use(cors());
 app.use(express.json());
 
 const postController = require("./controllers/post.controller");
+const userController = require("./controllers/user.controller");
 const loginAndSignUp = require("./controllers/login.controller");
 
 app.use("/", loginAndSignUp);
+app.use("/", postController);
+app.use("/", userController);
 app.get("/home", (req, res) => res.status(200).send("welcome to home"));
 
 module.exports = app;
