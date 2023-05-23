@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { setUserId } from "../Redux/action";
 
 function NavbarTop() {
-  const [userLogined, setUserLogined] = useState(false);
   const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
 
@@ -20,6 +19,7 @@ function NavbarTop() {
   }
 
   const userName = loadData("username");
+  const role = loadData("role");
 
   return (
     <>
@@ -31,7 +31,9 @@ function NavbarTop() {
               <>
                 <Nav.Link href="/home">Home</Nav.Link>
                 <Nav.Link href="/postForm">Create Post</Nav.Link>
-                <Nav.Link href="/adminPostForm">Admin</Nav.Link>
+                {role == "ADMIN" ? (
+                  <Nav.Link href="/adminPostForm">Admin</Nav.Link>
+                ) : null}
               </>
             ) : null}
           </Nav>

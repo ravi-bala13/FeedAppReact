@@ -34,7 +34,7 @@ router.post(
     // Hash the password using bcrypt
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const username = req.body.email.split("@")[0];
-    const userrole = "USER";
+    let userrole = "USER";
     if (username.startsWith("admin")) {
       userrole = "ADMIN";
     }

@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserId } from "../Redux/action";
+import { setIsLoading, setUserId } from "../Redux/action";
 import { loadData, saveData } from "../utils/localStorage";
 import { redirect, useNavigate } from "react-router-dom";
 
 const UserForm = ({ isLogin }) => {
   const navigate = useNavigate();
 
-  const state = useSelector((state) => state);
-  console.log("state:", state);
+  // ***** redux part *****
+  const { userId, isLoading } = useSelector((state) => state);
+  console.log("isLoading:", isLoading);
+  console.log("userId:", userId);
   const dispatch = useDispatch();
+  // ***************
 
-  const userId = loadData("userId");
+  // const userId = loadData("userId");
 
   const [formDetails, setFormDetails] = useState({
     email: "",
@@ -21,7 +24,8 @@ const UserForm = ({ isLogin }) => {
   });
   console.log("formDetails", formDetails);
 
-  const backendUrl = "https://feedappreact.onrender.com/";
+  // const backendUrl = "https://feedappreact.onrender.com/";
+  const backendUrl = "http://localhost:8080/";
 
   const onChange = (e) => {
     setFormDetails({ ...formDetails, [e.target.name]: e.target.value });
@@ -30,18 +34,23 @@ const UserForm = ({ isLogin }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     let formValues = { ...formDetails };
+    dispatch(setIsLoading(true));
     try {
       let url = backendUrl + (isLogin ? "login" : "signup");
+      console.log("Network calling to url", url);
       axios
         .post(url, formValues)
         .then((res) => {
           console.log("Response", res);
           alert(res.data.message);
           dispatch(setUserId(res.data.userId));
+          dispatch(setIsLoading(false));
           saveData("userId", res.data.userId);
           saveData("username", res.data.username);
+          saveData("role", res.data.userrole);
         })
         .catch((error) => {
+          dispatch(setIsLoading(false));
           let message = error.response.data.message;
           let errors = error.response.data.errors;
           if (errors != null && errors.length > 0) {
@@ -61,6 +70,17 @@ const UserForm = ({ isLogin }) => {
 
   if (userId) {
     navigate("/home");
+  }
+
+  if (isLoading) {
+    return (
+      <div className="loading-gif">
+        <img
+          src="https://media.tenor.com/hlKEXPvlX48AAAAi/loading-loader.gif"
+          alt=""
+        />
+      </div>
+    );
   }
 
   return (

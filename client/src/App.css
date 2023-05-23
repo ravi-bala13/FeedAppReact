@@ -90,6 +90,11 @@ body {
   border-radius: 10px;
   padding: 30px;
   color: #161a2b;
+  border: 1px solid red;
+}
+
+.post-container {
+  margin: 10px auto;
 }
 
 .user-box {
@@ -104,6 +109,12 @@ body {
   border-radius: 10px;
   padding: 30px;
   color: #161a2b;
+}
+
+.loading-gif>img {
+  /* border: 1px solid red; */
+  /* margin: 20%; */
+  margin-left: 30%;
 }
 
 h1 {

@@ -19,7 +19,7 @@ router.post("/posts/", async (req, res) => {
 // get all posts
 router.get("/posts/", async (req, res) => {
   try {
-    const post = await Post.find().populate({
+    const post = await Post.find().sort({ created_at: "desc" }).populate({
       path: "user_id",
       select: "user_name",
     });
