@@ -38,19 +38,18 @@ router.post(
     const user = new User({
       email: req.body.email,
       password: hashedPassword,
+      user_name: username,
     });
     await user.save();
 
     // Generate a JWT token for the user and send it in the response
     const token = jwt.sign({ userId: user._id }, secretKey);
-    res
-      .status(201)
-      .json({
-        message: "User created successfully",
-        token,
-        userId: user._id,
-        username: username,
-      });
+    res.status(201).json({
+      message: "User created successfully",
+      token,
+      userId: user._id,
+      username: username,
+    });
   }
 );
 
@@ -85,14 +84,12 @@ router.post(
     const username = req.body.email.split("@")[0];
     // Generate a JWT token for the user and send it in the response
     const token = jwt.sign({ userId: user._id }, secretKey);
-    res
-      .status(200)
-      .json({
-        message: "Login successful",
-        token,
-        userId: user._id,
-        username: username,
-      });
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      userId: user._id,
+      username: user.user_name,
+    });
   }
 );
 

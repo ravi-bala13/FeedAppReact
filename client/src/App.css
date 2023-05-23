@@ -73,6 +73,11 @@ body {
   overflow: scroll;
 }
 
+/* to hide scrollbar */
+.long-box::-webkit-scrollbar {
+  display: none;
+}
+
 .post-box {
   display: flex;
   flex-direction: column;

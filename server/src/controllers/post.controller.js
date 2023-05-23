@@ -19,7 +19,10 @@ router.post("/posts/", async (req, res) => {
 // get all posts
 router.get("/posts/", async (req, res) => {
   try {
-    const post = await Post.find();
+    const post = await Post.find().populate({
+      path: "user_id",
+      select: "user_name",
+    });
     res.status(201).json(post);
   } catch (error) {
     res.status(400).json({ message: error.message });

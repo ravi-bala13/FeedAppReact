@@ -1,8 +1,8 @@
 import { SET_USERID } from "./actionTypes";
 
 const initState = {
-  userId: "empty",
-  userName: "empty",
+  userId: null,
+  userName: null,
 };
 
 export const reducer = (state = initState, { type, payload }) => {

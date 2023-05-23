@@ -10,20 +10,6 @@ function NavbarTop() {
   const [userLogined, setUserLogined] = useState(false);
   const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
-  // const [userId, setUserId] = useState("");
-  // const [userName, setUserName] = useState("");
-
-  // useEffect(() => {
-  //   let user_id = loadData("userId");
-  //   if (user_id) {
-  //     setUserId(loadData("userId"));
-  //     setUserLogined(true);
-  //   }
-
-  //   setUserName(loadData("username"));
-  // }, []);
-
-  // const userId = loadData("userId");
   const userName = loadData("username");
 
   return (
@@ -32,8 +18,12 @@ function NavbarTop() {
         <Container>
           <Navbar.Brand href="#home">FeedApp</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            {userId ? <Nav.Link href="/postform">Create Post</Nav.Link> : null}
+            {userId ? (
+              <>
+                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/postform">Create Post</Nav.Link>
+              </>
+            ) : null}
           </Nav>
           {userId ? (
             <Nav>

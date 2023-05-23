@@ -60,7 +60,6 @@ const UserForm = ({ isLogin }) => {
   };
 
   if (userId) {
-    alert("redirecting");
     navigate("/home");
   }
 
