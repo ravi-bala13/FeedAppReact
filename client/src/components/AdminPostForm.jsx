@@ -13,6 +13,8 @@ function AdminPostForm() {
     getAllUsers();
   }, []);
 
+  const [usersList, setUsersList] = useState(["bala"]);
+
   const onChange = (e) => {
     setFormDetails({ ...formDetails, [e.target.name]: e.target.value });
   };
