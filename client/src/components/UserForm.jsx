@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading, setUserId } from "../Redux/action";
 import { loadData, saveData } from "../utils/localStorage";
 import { redirect, useNavigate } from "react-router-dom";
+import { backendUrl } from "../Constants/Constants";
 
 const UserForm = ({ isLogin }) => {
   const navigate = useNavigate();
@@ -23,9 +24,6 @@ const UserForm = ({ isLogin }) => {
     password: "",
   });
   console.log("formDetails", formDetails);
-
-  // const backendUrl = "https://feedappreact.onrender.com/";
-  const backendUrl = "http://localhost:8080/";
 
   const onChange = (e) => {
     setFormDetails({ ...formDetails, [e.target.name]: e.target.value });

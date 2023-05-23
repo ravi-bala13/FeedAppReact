@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { backendUrl } from "../Constants/Constants";
 
 function UsersList() {
   const [users, setUsers] = useState([]);
   console.log("users", users);
-
-  const backendUrl = "https://feedapp.onrender.com/";
 
   useEffect(() => {
     getAllUsers();

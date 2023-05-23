@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { backendUrl } from "../Constants/Constants";
 
 function PostForm() {
   const [formDetails, setFormDetails] = useState({
@@ -9,11 +10,6 @@ function PostForm() {
   });
 
   const userId = useSelector((state) => state.userId);
-
-  const backendUrl = "https://feedappreact.onrender.com/";
-  // const backendUrl = "http://localhost:8080/";
-
-  console.log("formDetails", formDetails);
 
   const onChange = (e) => {
     setFormDetails({ ...formDetails, [e.target.name]: e.target.value });

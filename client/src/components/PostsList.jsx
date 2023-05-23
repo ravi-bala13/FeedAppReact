@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./PostList.css";
+import { backendUrl } from "../Constants/Constants";
 
 function PostsList(props) {
   const [posts, setPosts] = useState([]);
@@ -10,9 +11,6 @@ function PostsList(props) {
   const { userId, isLoading } = useSelector((state) => state);
   console.log("isLoading:", isLoading);
   console.log("userId:", userId);
-
-  // const backendUrl = "https://feedappreact.onrender.com/";
-  const backendUrl = "http://localhost:8080/";
 
   useEffect(() => {
     getAllPosts();
