@@ -10,6 +10,15 @@ function NavbarTop() {
   const [userLogined, setUserLogined] = useState(false);
   const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
+
+  if (userId == null) {
+    // check local storage
+    let userIdFromLocalStorage = loadData("userId");
+    if (userIdFromLocalStorage) {
+      dispatch(setUserId(userIdFromLocalStorage));
+    }
+  }
+
   const userName = loadData("username");
 
   return (
@@ -20,8 +29,9 @@ function NavbarTop() {
           <Nav className="me-auto">
             {userId ? (
               <>
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/postform">Create Post</Nav.Link>
+                <Nav.Link href="/home">Home</Nav.Link>
+                <Nav.Link href="/postForm">Create Post</Nav.Link>
+                <Nav.Link href="/adminPostForm">Admin</Nav.Link>
               </>
             ) : null}
           </Nav>
