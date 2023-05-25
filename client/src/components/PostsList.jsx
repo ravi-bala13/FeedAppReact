@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import "./PostList.css";
 import { backendUrl } from "../Constants/Constants";
+import "../css/PostList.css";
 
 function PostsList(props) {
   const [posts, setPosts] = useState([]);

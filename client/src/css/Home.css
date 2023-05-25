@@ -1,0 +1,21 @@
+.home {
+    border: 1px solid red;
+    display: flex;
+    height: 100vh;
+}
+
+.left_side_div {
+    border: 1px solid red;
+    width: 30%;
+}
+
+.mid_div {
+    width: 40%;
+    border: 1px solid red;
+    overflow: hidden;
+}
+
+.right_side_div {
+    width: 30%;
+    border: 1px solid red;
+}
