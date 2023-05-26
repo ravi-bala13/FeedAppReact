@@ -3,8 +3,8 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading, setUserId } from "../Redux/action";
-import { loadData, saveData } from "../utils/localStorage";
-import { redirect, useNavigate } from "react-router-dom";
+import { saveData } from "../utils/localStorage";
+import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../Constants/Constants";
 
 const UserForm = ({ isLogin }) => {
@@ -12,8 +12,6 @@ const UserForm = ({ isLogin }) => {
 
   // ***** redux part *****
   const { userId, isLoading } = useSelector((state) => state);
-  console.log("isLoading:", isLoading);
-  console.log("userId:", userId);
   const dispatch = useDispatch();
   // ***************
 
@@ -23,7 +21,6 @@ const UserForm = ({ isLogin }) => {
     email: "",
     password: "",
   });
-  console.log("formDetails", formDetails);
 
   const onChange = (e) => {
     setFormDetails({ ...formDetails, [e.target.name]: e.target.value });

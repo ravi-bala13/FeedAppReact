@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import PostForm from "./PostForm";
 import UserForm from "./UserForm";
 import UsersList from "./UsersList";
-import PostsList from "./PostsList";
 import AdminPostForm from "./AdminPostForm";
 import Home from "./Home";
 

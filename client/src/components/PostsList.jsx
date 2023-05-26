@@ -6,11 +6,8 @@ import "../css/PostList.css";
 
 function PostsList(props) {
   const [posts, setPosts] = useState([]);
-  console.log("posts", posts);
 
   const { userId, isLoading } = useSelector((state) => state);
-  console.log("isLoading:", isLoading);
-  console.log("userId:", userId);
 
   useEffect(() => {
     getAllPosts();
@@ -38,7 +35,7 @@ function PostsList(props) {
   return (
     <div>
       {userId ? (
-        <div className="container-box long-box">
+        <div className="postlist_container_box long-box">
           {posts.map((ele, i) => (
             <div className="post-container" key={i}>
               <div className="post-title">

@@ -3,19 +3,16 @@ import "../css/Chat.css";
 import io from "socket.io-client";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { loadData } from "../utils/localStorage";
+import { websoketUrl } from "../Constants/Constants";
 
-export default function Chat() {
+export default function Chat({ recipient }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  console.log("messageList:", messageList);
-  //   const [username, setUsername] = useState("bala");
-  const [room, setRoom] = useState("bala");
 
   const username = loadData("username");
-  console.log("username:", username);
 
   //   const socket = io.connect(`http://localhost:3001`);
-  const socket = io("http://localhost:3001", {
+  const socket = io(websoketUrl, {
     query: {
       userId: username,
     },
@@ -25,20 +22,20 @@ export default function Chat() {
     console.log("Connected to server");
   });
 
-  const joinRoom = () => {
-    if (username !== "" && room !== "") {
-      socket.emit("join_room", room);
-      //   setShowChat(true);
-    }
-  };
-  joinRoom();
+  // to make a group chat we can use the room concept
+  // const joinRoom = () => {
+  //   if (username !== "" && room !== "") {
+  //     socket.emit("join_room", room);
+  //     //   setShowChat(true);
+  //   }
+  // };
+  // joinRoom();
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
-        room: room,
         author: username,
-        recipient: "bals161616",
+        recipient: recipient,
         message: currentMessage,
         time:
           new Date(Date.now()).getHours() +
@@ -54,7 +51,6 @@ export default function Chat() {
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      console.log("data:", data);
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
@@ -62,20 +58,20 @@ export default function Chat() {
   return (
     <div className="chat-window">
       <div className="chat-header">
-        <p>Live Chat</p>
+        <p>Live Chat - {recipient}</p>
       </div>
       <div className="chat-body">
         <ScrollToBottom className="message-container">
-          {messageList.map((messageContent) => {
-            console.log("messageContent:", messageContent);
+          {messageList.map((messageContent, i) => {
             return (
               <div
+                key={i}
                 className="message"
                 id={username === messageContent.author ? "you" : "other"}
               >
                 <div>
                   <div className="message-content">
-                    <p>{messageContent.message}fgdf</p>
+                    <p>{messageContent.message}</p>
                   </div>
                   <div className="message-meta">
                     <p id="time">{messageContent.time}</p>
@@ -95,9 +91,9 @@ export default function Chat() {
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
-          //   onKeyPress={(event) => {
-          //     event.key === "Enter" && sendMessage();
-          //   }}
+          onKeyPress={(event) => {
+            event.key === "Enter" && sendMessage();
+          }}
         />
         <button onClick={sendMessage}>&#9658;</button>
       </div>

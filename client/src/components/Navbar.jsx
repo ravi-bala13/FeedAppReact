@@ -3,7 +3,6 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { clearLocalStorage, loadData } from "../utils/localStorage";
-import { useEffect, useState } from "react";
 import { setUserId } from "../Redux/action";
 
 function NavbarTop() {
@@ -31,7 +30,7 @@ function NavbarTop() {
               <>
                 <Nav.Link href="/home">Home</Nav.Link>
                 <Nav.Link href="/postForm">Create Post</Nav.Link>
-                {role == "ADMIN" ? (
+                {role === "ADMIN" ? (
                   <Nav.Link href="/adminPostForm">Admin</Nav.Link>
                 ) : null}
               </>

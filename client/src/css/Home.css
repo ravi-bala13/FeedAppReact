@@ -1,21 +1,47 @@
 .home {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     height: 100vh;
 }
 
 .left_side_div {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 30%;
 }
 
 .mid_div {
     width: 40%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     overflow: hidden;
 }
 
 .right_side_div {
     width: 30%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+}
+
+/* chatUsers.jsx */
+
+.chat_users_container {
+    /* border: 1px solid red; */
+    width: 90%;
+    margin: 10px auto;
+    color: yellow;
+
+}
+
+.each_chat_user {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.chat_user_dp {
+    width: 10%;
+
+    border-radius: 40%;
 }
