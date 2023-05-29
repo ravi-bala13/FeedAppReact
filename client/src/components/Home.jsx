@@ -33,7 +33,7 @@ export default function Home() {
           </div>
 
           <div className="right_side_div">
-            <Chat recipient={recipient} />
+            <Chat recipient={recipient} setRecipient={setRecipient} />
           </div>
         </div>
       ) : null}

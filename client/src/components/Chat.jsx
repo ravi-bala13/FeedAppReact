@@ -4,8 +4,9 @@ import io from "socket.io-client";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { loadData } from "../utils/localStorage";
 import { websoketUrl } from "../Constants/Constants";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
-export default function Chat({ recipient }) {
+export default function Chat({ recipient, setRecipient }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
@@ -57,46 +58,56 @@ export default function Chat({ recipient }) {
 
   return (
     <div className="chat-window">
-      <div className="chat-header">
-        <p>Live Chat - {recipient}</p>
-      </div>
-      <div className="chat-body">
-        <ScrollToBottom className="message-container">
-          {messageList.map((messageContent, i) => {
-            return (
-              <div
-                key={i}
-                className="message"
-                id={username === messageContent.author ? "you" : "other"}
-              >
-                <div>
-                  <div className="message-content">
-                    <p>{messageContent.message}</p>
+      {recipient ? (
+        <>
+          <div className="chat-header">
+            <p>Live Chat - {recipient}</p>
+            <p>
+              <IoMdCloseCircleOutline
+                onClick={() => setRecipient("")}
+                className="minimize-icon"
+              />
+            </p>
+          </div>
+          <div className="chat-body">
+            <ScrollToBottom className="message-container">
+              {messageList.map((messageContent, i) => {
+                return (
+                  <div
+                    key={i}
+                    className="message"
+                    id={username === messageContent.author ? "you" : "other"}
+                  >
+                    <div>
+                      <div className="message-content">
+                        <p>{messageContent.message}</p>
+                      </div>
+                      <div className="message-meta">
+                        <p id="time">{messageContent.time}</p>
+                        <p id="author">{messageContent.author}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="message-meta">
-                    <p id="time">{messageContent.time}</p>
-                    <p id="author">{messageContent.author}</p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </ScrollToBottom>
-      </div>
-      <div className="chat-footer">
-        <input
-          type="text"
-          value={currentMessage}
-          placeholder="Hey..."
-          onChange={(event) => {
-            setCurrentMessage(event.target.value);
-          }}
-          onKeyPress={(event) => {
-            event.key === "Enter" && sendMessage();
-          }}
-        />
-        <button onClick={sendMessage}>&#9658;</button>
-      </div>
+                );
+              })}
+            </ScrollToBottom>
+          </div>
+          <div className="chat-footer">
+            <input
+              type="text"
+              value={currentMessage}
+              placeholder="Hey..."
+              onChange={(event) => {
+                setCurrentMessage(event.target.value);
+              }}
+              onKeyPress={(event) => {
+                event.key === "Enter" && sendMessage();
+              }}
+            />
+            <button onClick={sendMessage}>&#9658;</button>
+          </div>
+        </>
+      ) : null}
     </div>
   );
 }

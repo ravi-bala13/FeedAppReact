@@ -2,11 +2,13 @@
     /* border: 1px solid red; */
     display: flex;
     height: 100vh;
+    background-color: #f1f1f1;
 }
 
 .left_side_div {
     /* border: 1px solid red; */
     width: 30%;
+    /* background-color: #ffffff; */
 }
 
 .mid_div {
@@ -27,6 +29,7 @@
     width: 90%;
     margin: 10px auto;
     color: yellow;
+    color: black;
 
 }
 
@@ -36,8 +39,10 @@
     height: 50px;
     align-items: center;
     gap: 10px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 10px;
+    background-color: #ffffff;
+    border-bottom: 1px solid darkgoldenrod;
 }
 
 .chat_user_dp {
