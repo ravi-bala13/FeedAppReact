@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { backendUrl } from "../utils/Constants";
+import Cookies from "js-cookie";
 
 function PostForm() {
   const [formDetails, setFormDetails] = useState({
     content: "",
   });
 
-  const userId = useSelector((state) => state.userId);
+  const token = Cookies.get("token");
 
   const onChange = (e) => {
     setFormDetails({ ...formDetails, [e.target.name]: e.target.value });
@@ -18,7 +18,7 @@ function PostForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     let body = {
-      user_id: userId,
+      token,
       content: formDetails.content,
     };
     try {
@@ -35,24 +35,6 @@ function PostForm() {
     <div className="container-box">
       <Form onSubmit={handleSubmit}>
         <h1>Create Post</h1>
-        {/* <Form.Group controlId="formPlace">
-          {" "}
-          new form group for place
-          <Form.Label>User</Form.Label>
-          <Form.Control
-            as="select"
-            value={formDetails.user_id}
-            name="user_id"
-            onChange={onChange}
-          >
-            <option value="">Select a place</option>
-            {usersList.map((ele, index) => (
-              <option key={index} value={ele._id}>
-                {ele.name}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group> */}
 
         <Form.Group controlId="bio">
           <Form.Label>Content</Form.Label>

@@ -1,12 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/post.model");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 // Create a new post. The request should have the user_id.
 router.post("/posts/", async (req, res) => {
   try {
+    const { token } = req.body;
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("userId", decoded.user._id);
+
     const post = new Post({
-      user_id: req.body.user_id,
+      user_id: decoded.user._id,
       content: req.body.content,
     });
     const savedPost = await post.save();

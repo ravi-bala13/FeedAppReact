@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 export default function Home() {
   const [recipient, setRecipient] = useState("");
-  const { userId, isLoading } = useSelector((state) => state);
+  const { isLoading } = useSelector((state) => state);
 
   if (isLoading) {
     return (
@@ -21,22 +21,18 @@ export default function Home() {
   }
 
   return (
-    <div>
-      {userId ? (
-        <div className="home">
-          <div className="left_side_div">
-            <ChatUsers setRecipient={setRecipient} />
-          </div>
+    <div className="home">
+      <div className="left_side_div">
+        <ChatUsers setRecipient={setRecipient} />
+      </div>
 
-          <div className="mid_div">
-            <PostsList />
-          </div>
+      <div className="mid_div">
+        <PostsList />
+      </div>
 
-          <div className="right_side_div">
-            <Chat recipient={recipient} setRecipient={setRecipient} />
-          </div>
-        </div>
-      ) : null}
+      <div className="right_side_div">
+        <Chat recipient={recipient} setRecipient={setRecipient} />
+      </div>
     </div>
   );
 }
