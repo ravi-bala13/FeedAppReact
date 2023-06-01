@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { backendUrl } from "../Constants/Constants";
+import { backendUrl } from "../utils/Constants";
 
 function PostForm() {
   const [formDetails, setFormDetails] = useState({

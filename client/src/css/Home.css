@@ -50,3 +50,23 @@
 
     border-radius: 40%;
 }
+
+/* login */
+
+.google_login {
+    /* border: 1px solid red; */
+    width: 20%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 15px;
+    box-sizing: border-box;
+}
+
+.g_login_img {
+    width: 80%;
+    /* margin: auto; */
+    margin-left: 10%;
+    /* border: 1px solid darkblue; */
+}

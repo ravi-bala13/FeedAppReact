@@ -3,7 +3,7 @@ import "../css/Chat.css";
 import io from "socket.io-client";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { loadData } from "../utils/localStorage";
-import { websoketUrl } from "../Constants/Constants";
+import { websoketUrl } from "../utils/Constants";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 
 export default function Chat({ recipient, setRecipient }) {

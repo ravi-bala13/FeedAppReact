@@ -1,7 +1,12 @@
-const { SET_USERID, SET_ISLOADING } = require("./actionTypes");
+const { SET_USERID, SET_ISLOADING, SET_TOKEN } = require("./actionTypes");
 
 export const setUserId = (data) => ({
   type: SET_USERID,
+  payload: data,
+});
+
+export const setToken = (data) => ({
+  type: SET_TOKEN,
   payload: data,
 });
 

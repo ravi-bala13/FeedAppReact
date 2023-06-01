@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { backendUrl } from "../Constants/Constants";
+import { backendUrl } from "../utils/Constants";
 
 function UsersList() {
   const [users, setUsers] = useState([]);

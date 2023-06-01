@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { backendUrl } from "../Constants/Constants";
+import { backendUrl } from "../utils/Constants";
 
 function AdminPostForm() {
   const [formDetails, setFormDetails] = useState({

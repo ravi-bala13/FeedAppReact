@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading, setUserId } from "../Redux/action";
 import { saveData } from "../utils/localStorage";
 import { useNavigate } from "react-router-dom";
-import { backendUrl } from "../Constants/Constants";
+import { backendUrl } from "../utils/Constants";
 
 const UserForm = ({ isLogin }) => {
   const navigate = useNavigate();
