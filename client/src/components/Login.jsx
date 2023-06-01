@@ -18,10 +18,12 @@ import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../utils/Constants";
 import GLogin from "./GLogin";
 import { saveData } from "../utils/localStorage";
+import Cookies from "js-cookie";
 
 export default function Login() {
+  const token = Cookies.get("token");
   const navigate = useNavigate();
-  const { token, isLoading } = useSelector((state) => state);
+  const { isLoading } = useSelector((state) => state);
   const dispatch = useDispatch();
   const defaultTheme = createTheme();
 
