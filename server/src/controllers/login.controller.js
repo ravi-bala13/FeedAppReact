@@ -90,6 +90,7 @@ router.post(
     const username = req.body.email.split("@")[0];
     // Generate a JWT token for the user and send it in the response
     const token = jwt.sign({ user }, process.env.JWT_SECRET);
+    res.cookie("token", token);
     res.status(200).json({
       message: "Login successful",
       token,

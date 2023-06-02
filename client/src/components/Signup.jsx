@@ -45,6 +45,7 @@ export default function Signup() {
           const { token, message } = res.data;
           document.cookie = `token=${token}; path=/;`;
 
+          saveData("token", token);
           alert(message);
           dispatch(setToken(token));
           dispatch(setIsLoading(false));

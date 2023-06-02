@@ -49,6 +49,7 @@ export default function Login() {
           const { token, message } = res.data;
           dispatch(setToken(token));
           dispatch(setIsLoading(false));
+          saveData("token", token);
           saveData("userId", res.data.userId);
           saveData("username", res.data.username);
           saveData("role", res.data.userrole);
