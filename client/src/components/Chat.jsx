@@ -2,20 +2,23 @@ import React, { useEffect, useState } from "react";
 import "../css/Chat.css";
 import io from "socket.io-client";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { loadData } from "../utils/localStorage";
 import { websoketUrl } from "../utils/Constants";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import Cookies from "js-cookie";
 
 export default function Chat({ recipient, setRecipient }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
-  const username = loadData("username");
+  const token = Cookies.get("token");
+  if (token) {
+    let decodeToken = JSON.parse(atob(token.split(".")[1]));
+    var { user_name: userName = null } = decodeToken.user;
+  }
 
-  //   const socket = io.connect(`http://localhost:3001`);
   const socket = io(websoketUrl, {
     query: {
-      userId: username,
+      userId: userName,
     },
   });
 
@@ -23,19 +26,10 @@ export default function Chat({ recipient, setRecipient }) {
     console.log("Connected to server");
   });
 
-  // to make a group chat we can use the room concept
-  // const joinRoom = () => {
-  //   if (username !== "" && room !== "") {
-  //     socket.emit("join_room", room);
-  //     //   setShowChat(true);
-  //   }
-  // };
-  // joinRoom();
-
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
-        author: username,
+        author: userName,
         recipient: recipient,
         message: currentMessage,
         time:
@@ -76,7 +70,7 @@ export default function Chat({ recipient, setRecipient }) {
                   <div
                     key={i}
                     className="message"
-                    id={username === messageContent.author ? "you" : "other"}
+                    id={userName === messageContent.author ? "you" : "other"}
                   >
                     <div>
                       <div className="message-content">

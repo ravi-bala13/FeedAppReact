@@ -86,12 +86,7 @@ h1 {
   margin-top: 50px;
 }
 
-.bottom-box {
-  display: flex;
-  justify-self: flex-start;
-  gap: 10px;
-  padding-left: 20px;
-}
+
 
 .container-box {
   display: flex;

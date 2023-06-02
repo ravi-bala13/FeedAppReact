@@ -17,15 +17,15 @@ import { setIsLoading, setToken } from "../Redux/action";
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../utils/Constants";
 import GLogin from "./GLogin";
-import { saveData } from "../utils/localStorage";
 import Cookies from "js-cookie";
 
 export default function Login() {
   const token = Cookies.get("token");
   const navigate = useNavigate();
+  const defaultTheme = createTheme();
+
   const { isLoading } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const defaultTheme = createTheme();
 
   const [userDetails, setUserDetails] = useState({
     email: "",
@@ -49,10 +49,6 @@ export default function Login() {
           const { token, message } = res.data;
           dispatch(setToken(token));
           dispatch(setIsLoading(false));
-          saveData("token", token);
-          saveData("userId", res.data.userId);
-          saveData("username", res.data.username);
-          saveData("role", res.data.userrole);
 
           document.cookie = `token=${token}; path=/;`;
           alert(message);

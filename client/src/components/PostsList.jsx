@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { backendUrl } from "../utils/Constants";
 import "../css/PostList.css";
+import { Box } from "@mui/material";
 
 function PostsList(props) {
   const [posts, setPosts] = useState([]);
@@ -22,7 +23,14 @@ function PostsList(props) {
     <div>
       <div className="postlist_container_box long-box">
         {posts.map((ele, i) => (
-          <div className="post-container" key={i}>
+          <Box
+            className="post-container"
+            boxShadow={3}
+            borderRadius={8}
+            p={3}
+            key={i}
+          >
+            {/* <div className="post-container" key={i}> */}
             <div className="post-title">
               <img
                 src="https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png"
@@ -31,13 +39,16 @@ function PostsList(props) {
               {ele.user_id.user_name}
             </div>
             <div className="post-box">{ele.content}</div>
+            <div className="count-box">
+              <span>33 likes</span>
+            </div>
             <div className="bottom-box">
               <span>Like</span>
-              <span>Dislike</span>
-              <span>Edit</span>
-              <span>Delete</span>
+              <span>Comment</span>
+              <span>Share</span>
             </div>
-          </div>
+            {/* </div> */}
+          </Box>
         ))}
       </div>
     </div>

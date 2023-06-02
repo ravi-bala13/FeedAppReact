@@ -14,7 +14,6 @@ import { backendUrl } from "../utils/Constants";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setIsLoading, setToken } from "../Redux/action";
-import { saveData } from "../utils/localStorage";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -44,14 +43,9 @@ export default function Signup() {
         .then((res) => {
           const { token, message } = res.data;
           document.cookie = `token=${token}; path=/;`;
-
-          saveData("token", token);
           alert(message);
           dispatch(setToken(token));
           dispatch(setIsLoading(false));
-          saveData("userId", res.data.userId);
-          saveData("username", res.data.username);
-          saveData("role", res.data.userrole);
         })
         .catch((error) => {
           console.log("error:", error);

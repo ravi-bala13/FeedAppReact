@@ -1,29 +1,23 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useDispatch, useSelector } from "react-redux";
-import { clearLocalStorage, loadData } from "../utils/localStorage";
+import { useDispatch } from "react-redux";
+import { clearLocalStorage } from "../utils/localStorage";
 import { setUserId } from "../Redux/action";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 function NavbarTop() {
-  const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // getting token from cookie and parse
   const token = Cookies.get("token");
-
-  if (userId == null) {
-    // check local storage
-    let userIdFromLocalStorage = loadData("userId");
-    if (userIdFromLocalStorage) {
-      dispatch(setUserId(userIdFromLocalStorage));
-    }
+  console.log("token:", token);
+  if (token) {
+    let decodeToken = JSON.parse(atob(token.split(".")[1]));
+    var { user_name: userName = null, role = null } = decodeToken.user;
   }
-
-  const userName = loadData("username");
-  const role = loadData("role");
 
   const handleLogout = () => {
     // clear the token from the cookie by setting expiry date to the past
