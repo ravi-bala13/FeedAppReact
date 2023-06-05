@@ -6,8 +6,15 @@ import { Box } from "@mui/material";
 import Cookies from "js-cookie";
 
 function PostsList(props) {
-  const [posts, setPosts] = useState([]);
-  console.log("posts:", posts);
+  const [postList, setPostList] = useState([
+    {
+      _postId: null,
+      _username: null,
+      _content: null,
+      _likes: 0,
+      _isUserLiked: false,
+    },
+  ]);
 
   // getting token from cookie and parse
   const token = Cookies.get("token");
@@ -18,36 +25,50 @@ function PostsList(props) {
   }
 
   useEffect(() => {
+    const getAllPosts = () => {
+      try {
+        axios
+          .get(backendUrl + "posts/" + userId)
+          .then((res) => setPostList(res.data));
+      } catch (error) {
+        console.log("Error in getAllUsers", error);
+      }
+    };
     getAllPosts();
-  }, []);
-
-  const getAllPosts = () => {
-    try {
-      axios
-        .get(backendUrl + "posts/" + userId)
-        .then((res) => setPosts(res.data));
-    } catch (error) {
-      console.log("Error in getAllUsers", error);
-    }
-  };
+  }, [userId]);
 
   const handleLikes = (postId, typeOfLike) => {
+    // Doing this for front end change without waiting for backend updation
+    let tempPosts = [...postList];
+    tempPosts.map((post) => {
+      if (post._postId === postId) {
+        post._likes = typeOfLike === "like" ? post._likes + 1 : post._likes - 1;
+        post._isUserLiked = !post._isUserLiked;
+      }
+      return post;
+    });
+    setPostList(tempPosts);
+    // ************************************************88
+
     try {
-      const url = `${backendUrl}posts/${postId}/${typeOfLike}/${userId}`;
+      const url = `${backendUrl}posts/${typeOfLike}`;
+      const body = {
+        postId,
+        userId,
+      };
       console.log("Network calling to url", url);
-      axios.post(url).then((res) => {
+      axios.post(url, body).then((res) => {
         console.log("Response", res);
-        // alert("Post created successfully");
       });
     } catch (error) {
-      console.log("Error in handleSubmit", error);
+      console.log("Error in handleLikes", error);
     }
   };
 
   return (
     <div>
       <div className="postlist_container_box long-box">
-        {posts.map((ele, i) => (
+        {postList.map((post, i) => (
           <Box
             className="post-container"
             boxShadow={3}
@@ -55,30 +76,36 @@ function PostsList(props) {
             p={3}
             key={i}
           >
-            {/* <div className="post-container" key={i}> */}
             <div className="post-title">
               <img
                 src="https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png"
                 alt=""
               />
-              {ele._username}
+              {post._username}
             </div>
-            <div className="post-box">{ele._content}</div>
+            <div className="post-box">{post._content}</div>
             <div className="count-box">
-              <span>{ele._likes} likes</span>
+              <span>
+                {post._isUserLiked
+                  ? `You and ${post._likes - 1} more likes`
+                  : `${post._likes} likes`}
+              </span>
             </div>
             <div className="bottom-box">
               <span
+                className={post._isUserLiked ? "unlike" : "like"}
                 onClick={() =>
-                  handleLikes(ele._postId, ele._isUserLiked ? "unlike" : "like")
+                  handleLikes(
+                    post._postId,
+                    post._isUserLiked ? "unlike" : "like"
+                  )
                 }
               >
-                {ele._isUserLiked ? "UnLike" : "Like"}
+                {post._isUserLiked ? "UnLike" : "Like"}
               </span>
               <span>Comment</span>
               <span>Share</span>
             </div>
-            {/* </div> */}
           </Box>
         ))}
       </div>

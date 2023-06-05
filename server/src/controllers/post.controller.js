@@ -21,6 +21,7 @@ router.post("/posts/", async (req, res) => {
     const savedPost = await post.save();
     res.status(201).json(savedPost);
   } catch (error) {
+    console.log("Error in Create a new post:", error);
     res.status(400).json({ message: error.message });
   }
 });
@@ -35,20 +36,16 @@ router.get("/posts/:loginedUserId", async (req, res) => {
     });
 
     const postIds = allPost.map((post) => post._id);
-    // console.log("postIds:", postIds);
 
     const likes = await Like.find({
       post_id: { $in: postIds },
       user_id: loginedUserId,
     });
-    // console.log("likes:", likes);
     const map = new Map(); //postId(key) => likedUserId(value)
 
     likes.forEach((element) => {
       map.set(element.post_id.toString(), element.user_id.toString());
     });
-
-    // console.log("map:", map);
 
     const postResponses = [];
     allPost.forEach((post) => {
@@ -60,25 +57,11 @@ router.get("/posts/:loginedUserId", async (req, res) => {
       postResponse._isUserLiked = map.get(post._id.toString()) == loginedUserId;
       postResponses.push(postResponse);
     });
-    // console.log("postResponse:", postResponses);
 
     res.status(201).json(postResponses);
   } catch (error) {
-    console.log("error:", error);
+    console.log("Error in get all posts:", error);
     res.status(400).json({ message: error.message });
-  }
-});
-
-// GEt details of a post by id.
-router.get("/posts/:id", async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
-    }
-    res.json(post);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
   }
 });
 
@@ -93,6 +76,7 @@ router.put("/posts/:id", async (req, res) => {
     const updatedPost = await post.save();
     res.json(updatedPost);
   } catch (error) {
+    console.log("Error in Update a post content by id:", error);
     res.status(400).json({ message: error.message });
   }
 });
@@ -107,49 +91,8 @@ router.delete("/posts/:id", async (req, res) => {
     await post.remove();
     res.json({ message: "Post deleted" });
   } catch (error) {
+    console.log("Error in Delete a post by id:", error);
     res.status(500).json({ message: error.message });
-  }
-});
-
-// // Increment the like count of a post by id.
-// router.post("/posts/:id/like", async (req, res) => {
-//   try {
-//     const post = await Post.findById(req.params.id);
-//     if (!post) {
-//       return res.status(404).json({ message: "Post not found" });
-//     }
-//     post.likes++;
-//     const updatedPost = await post.save();
-//     res.json(updatedPost);
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// });
-
-// // Decrement the like count of a post by id. The count should not go below 0.
-// router.post("/posts/:id/unlike", async (req, res) => {
-//   try {
-//     const post = await Post.findById(req.params.id);
-//     if (!post) {
-//       return res.status(404).json({ message: "Post not found" });
-//     }
-//     if (post.likes > 0) {
-//       post.likes--;
-//     }
-//     const updatedPost = await post.save();
-//     res.json(updatedPost);
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// });
-
-// Get the total number of posts
-router.get("/analytics/posts", async (req, res) => {
-  try {
-    const count = await Post.countDocuments();
-    res.send({ count });
-  } catch (error) {
-    res.status(500).send(error);
   }
 });
 
@@ -159,6 +102,7 @@ router.get("/analytics/posts/top-liked", async (req, res) => {
     const posts = await Post.find().sort({ likes: -1 }).limit(5);
     res.send(posts);
   } catch (error) {
+    console.log("Error in Get the top 5 most liked posts:", error);
     res.status(500).send(error);
   }
 });

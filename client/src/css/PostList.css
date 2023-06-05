@@ -69,3 +69,11 @@
     justify-self: flex-start;
     gap: 10px;
 }
+
+.like {
+    color: black;
+}
+
+.unlike {
+    color: blue;
+}
