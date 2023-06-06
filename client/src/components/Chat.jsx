@@ -55,7 +55,7 @@ export default function Chat({ recipient, setRecipient }) {
       {recipient ? (
         <>
           <div className="chat-header">
-            <p>Live Chat - {recipient}</p>
+            <p>{recipient}</p>
             <p>
               <IoMdCloseCircleOutline
                 onClick={() => setRecipient("")}
@@ -90,7 +90,7 @@ export default function Chat({ recipient, setRecipient }) {
             <input
               type="text"
               value={currentMessage}
-              placeholder="Hey..."
+              placeholder={"Chat with " + recipient}
               onChange={(event) => {
                 setCurrentMessage(event.target.value);
               }}

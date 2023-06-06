@@ -26,8 +26,9 @@
 
 .chat_users_container {
     /* border: 1px solid red; */
+    border-radius: 10px;
     width: 90%;
-    margin: 10px auto;
+    margin: 15px auto;
     color: yellow;
     color: black;
 
@@ -39,10 +40,11 @@
     height: 50px;
     align-items: center;
     gap: 10px;
-    /* border: 1px solid black; */
+    cursor: pointer;
     padding: 10px;
     background-color: #ffffff;
     border-bottom: 1px solid darkgoldenrod;
+    border-radius: 10px;
 }
 
 .chat_user_dp {

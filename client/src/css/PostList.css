@@ -2,9 +2,10 @@
     display: flex;
     align-items: center;
     gap: 2%;
+    /* border: 1px solid red; */
 }
 
-.post-title>img {
+.avatar {
     width: 7%;
     border-radius: 40%;
 }
@@ -20,6 +21,7 @@
     margin: auto;
     border-radius: 10px;
     padding: 30px;
+    /* border: 1px solid red; */
 }
 
 .long-box {
@@ -37,7 +39,7 @@
     display: none;
 }
 
-.post-box {
+.post-content-box {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -49,12 +51,14 @@
     border-radius: 10px;
     padding: 30px;
     color: #161a2b;
-    border: 1px solid red;
+    border: 1px solid rgb(122, 117, 117);
 }
 
 .post-container {
     margin: 10px auto;
     background-color: #ffffff;
+    /* border: 1px solid red; */
+
 }
 
 .count-box {
@@ -62,6 +66,8 @@
     border-bottom: 1px solid #d3cdcd;
     display: flex;
     justify-content: left;
+    color: #606165;
+    font-size: smaller;
 }
 
 .bottom-box {
@@ -72,8 +78,10 @@
 
 .like {
     color: black;
+    cursor: pointer;
 }
 
 .unlike {
     color: blue;
+    cursor: pointer;
 }

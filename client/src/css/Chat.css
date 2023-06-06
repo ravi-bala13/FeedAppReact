@@ -4,6 +4,8 @@
     /* border: 1px solid black; */
     margin: auto;
     margin-top: 220px;
+    position: fixed;
+    right: 0;
 }
 
 /* .chat-window p {
@@ -30,7 +32,7 @@
     display: block;
     padding: 0 1em 0 2em;
     color: #fff;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 45px;
 }
 

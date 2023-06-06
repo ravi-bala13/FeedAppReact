@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { backendUrl } from "../utils/Constants";
 import "../css/PostList.css";
-import { Box } from "@mui/material";
+import { Avatar, Box } from "@mui/material";
 import Cookies from "js-cookie";
+import { deepPurple } from "@mui/material/colors";
 
 function PostsList(props) {
   const [postList, setPostList] = useState([
@@ -18,7 +19,6 @@ function PostsList(props) {
 
   // getting token from cookie and parse
   const token = Cookies.get("token");
-  console.log("token:", token);
   if (token) {
     let decodeToken = JSON.parse(atob(token.split(".")[1]));
     var { _id: userId = null } = decodeToken.user;
@@ -72,18 +72,18 @@ function PostsList(props) {
           <Box
             className="post-container"
             boxShadow={3}
-            borderRadius={8}
+            borderRadius={5}
             p={3}
             key={i}
+            width={"95%"}
           >
             <div className="post-title">
-              <img
-                src="https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png"
-                alt=""
-              />
+              <Avatar className="avatar" sx={{ bgcolor: deepPurple[500] }}>
+                {post._username ? post._username[0].toUpperCase() : null}
+              </Avatar>
               {post._username}
             </div>
-            <div className="post-box">{post._content}</div>
+            <div className="post-content-box">{post._content}</div>
             <div className="count-box">
               <span>
                 {post._isUserLiked

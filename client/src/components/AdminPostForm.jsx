@@ -53,7 +53,7 @@ function AdminPostForm() {
             name="user_id"
             onChange={onChange}
           >
-            <option value="">Select a place</option>
+            <option value="">Select a user</option>
             {usersList.map((ele, index) => (
               <option key={index} value={ele._id}>
                 {ele.user_name}
