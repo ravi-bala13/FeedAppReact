@@ -19,15 +19,20 @@
   },
   "homepage": "https://github.com/ravi-bala13/FeedApp#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "mongoose": "^7.0.3",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "dotenv": "^14.2.0",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "express-validator": "^6.15.0",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^7.0.3",
     "nodemon": "^2.0.15",
-    "npm": "^8.3.0"
+    "npm": "^8.3.0",
+    "passport": "^0.6.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-jwt": "^4.0.1",
+    "uuidv4": "^6.2.13"
   }
 }

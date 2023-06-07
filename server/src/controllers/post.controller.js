@@ -29,11 +29,71 @@ router.post("/posts/", async (req, res) => {
 // get all posts
 router.get("/posts/:loginedUserId", async (req, res) => {
   try {
-    const loginedUserId = req.params.loginedUserId;
-    const allPost = await Post.find().sort({ created_at: "desc" }).populate({
-      path: "user_id",
-      select: "user_name",
+    const page = +req.query.page || 1;
+    const size = +req.query.size || 5;
+    const skip = (page - 1) * size;
+    const loginedUserId = req.params.loginedUserId; // to know the logined user liked the posts or not
+
+    const allPost = await Post.find()
+      .skip(skip)
+      .limit(size)
+      .sort({ created_at: "desc" })
+      .populate({
+        path: "user_id",
+        select: "user_name",
+      });
+
+    const postIds = allPost.map((post) => post._id);
+
+    const likes = await Like.find({
+      post_id: { $in: postIds },
+      user_id: loginedUserId,
     });
+    const map = new Map(); //postId(key) => likedUserId(value)
+
+    likes.forEach((element) => {
+      map.set(element.post_id.toString(), element.user_id.toString());
+    });
+
+    const postResponses = [];
+    allPost.forEach((post) => {
+      const postResponse = new PostResponse();
+      postResponse._postId = post._id;
+      postResponse._username = post.user_id.user_name;
+      postResponse._content = post.content;
+      postResponse._likes = post.likes;
+      postResponse._isUserLiked = map.get(post._id.toString()) == loginedUserId;
+      postResponses.push(postResponse);
+    });
+
+    res.status(201).json(postResponses);
+  } catch (error) {
+    console.log("Error in get all posts:", error);
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// get all posts for particular user
+router.get("/posts/self/:loginedUserId", async (req, res) => {
+  try {
+    const page = +req.query.page || 1;
+    const size = +req.query.size || 5;
+    const skip = (page - 1) * size;
+    const loginedUserId = req.params.loginedUserId; // to know the logined user liked the posts or not
+
+    const allPost = await Post.find({ user_id: loginedUserId })
+      .skip(skip)
+      .limit(size)
+      .sort({ created_at: "desc" })
+      .populate({
+        path: "user_id",
+        select: "user_name",
+      });
+
+    const totalPages = Math.ceil(
+      (await User.find({ user_id: loginedUserId }).countDocuments()) / size
+    );
+    // console.log('totalPages:', user, totalPages)
 
     const postIds = allPost.map((post) => post._id);
 
