@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { backendUrl } from "../utils/Constants";
 import "../css/PostList.css";
 import { Avatar, Box } from "@mui/material";
-import Cookies from "js-cookie";
 import { deepPurple } from "@mui/material/colors";
+import { useSelector } from "react-redux";
 
 function PostsList(props) {
   const [postList, setPostList] = useState([
@@ -17,8 +17,7 @@ function PostsList(props) {
     },
   ]);
 
-  // getting token from cookie and parse
-  const token = Cookies.get("token");
+  const { token } = useSelector((state) => state);
   if (token) {
     let decodeToken = JSON.parse(atob(token.split(".")[1]));
     var { _id: userId = null } = decodeToken.user;
@@ -26,10 +25,13 @@ function PostsList(props) {
 
   useEffect(() => {
     const getAllPosts = () => {
+      const url = `${backendUrl}posts/${userId}`;
+      console.log("url:", url);
       try {
-        axios
-          .get(backendUrl + "posts/" + userId)
-          .then((res) => setPostList(res.data));
+        axios.get(backendUrl + "posts/" + userId).then((res) => {
+          setPostList(res.data);
+          console.log("Response for getting all post", res.data);
+        });
       } catch (error) {
         console.log("Error in getAllUsers", error);
       }
@@ -58,7 +60,7 @@ function PostsList(props) {
       };
       console.log("Network calling to url", url);
       axios.post(url, body).then((res) => {
-        console.log("Response", res);
+        console.log("Response for like the post", res);
       });
     } catch (error) {
       console.log("Error in handleLikes", error);

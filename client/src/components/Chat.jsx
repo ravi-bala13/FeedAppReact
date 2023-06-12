@@ -4,13 +4,13 @@ import io from "socket.io-client";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { websoketUrl } from "../utils/Constants";
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
 
 export default function Chat({ recipient, setRecipient }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
-  const token = Cookies.get("token");
+  const { token } = useSelector((state) => state);
   if (token) {
     let decodeToken = JSON.parse(atob(token.split(".")[1]));
     var { user_name: userName = null } = decodeToken.user;

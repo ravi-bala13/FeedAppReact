@@ -71,6 +71,7 @@ router.post(
 
     // Find the user with the given email in the database
     const user = await User.findOne({ email: req.body.email });
+    console.log("user:", user);
     if (!user) {
       return res
         .status(401)

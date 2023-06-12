@@ -1,13 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { backendUrl } from "../utils/Constants";
-import { loadData } from "../utils/localStorage";
 import { Avatar, Box } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
+import { useSelector } from "react-redux";
 
 export default function ChatUsers({ setRecipient }) {
   const [usersList, setUsersList] = useState(["bala"]);
-  const username = loadData("username");
+
+  const { token } = useSelector((state) => state);
+  if (token) {
+    let decodeToken = JSON.parse(atob(token.split(".")[1]));
+    var { user_name: username = null } = decodeToken.user;
+  }
 
   const getAllUsers = () => {
     try {

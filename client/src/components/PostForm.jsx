@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { backendUrl } from "../utils/Constants";
-import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
 
 function PostForm() {
   const [formDetails, setFormDetails] = useState({
     content: "",
   });
 
-  const token = Cookies.get("token");
+  const { token } = useSelector((state) => state);
 
   const onChange = (e) => {
     setFormDetails({ ...formDetails, [e.target.name]: e.target.value });

@@ -17,10 +17,9 @@ import { setIsLoading, setToken } from "../Redux/action";
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../utils/Constants";
 import GLogin from "./GLogin";
-import Cookies from "js-cookie";
 
 export default function Login() {
-  const token = Cookies.get("token");
+  const { token } = useSelector((state) => state);
   const navigate = useNavigate();
   const defaultTheme = createTheme();
 
