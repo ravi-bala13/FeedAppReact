@@ -6,34 +6,55 @@ import { Avatar, Box } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import { useSelector } from "react-redux";
 
-function PostsList(props) {
+import InfiniteScroll from "react-infinite-scroll-component";
+
+function PostsList() {
   const [postList, setPostList] = useState([
-    {
-      _postId: null,
-      _username: null,
-      _content: null,
-      _likes: 0,
-      _isUserLiked: false,
-    },
+    // {
+    //   _postId: null,
+    //   _username: null,
+    //   _content: null,
+    //   _likes: 0,
+    //   _isUserLiked: false,
+    // },
   ]);
+  console.log("postList:", postList);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
 
   const { userId } = useSelector((state) => state);
 
-  useEffect(() => {
-    const getAllPosts = () => {
-      const url = `${backendUrl}posts/${userId}`;
-      console.log("Network call to:", url);
-      try {
-        axios.get(backendUrl + "posts/" + userId).then((res) => {
-          setPostList(res.data);
-          console.log("Response for getting all post", res.data);
+  const getAllPosts = () => {
+    const url = `${backendUrl}posts/${userId}`;
+    console.log("Network call to:", url);
+    try {
+      axios
+        .get(url, {
+          params: {
+            page: page,
+            size: 7,
+          },
+        })
+        .then((res) => {
+          let list = res.data;
+          if (list.length === 0) {
+            setHasMore(false);
+          }
+          setPostList((prev) => [...prev, ...list]);
+          setPage((prevPage) => prevPage + 1);
+
+          console.log("Response for getting all post", list);
         });
-      } catch (error) {
-        console.log("Error in getAllUsers", error);
-      }
-    };
+    } catch (error) {
+      console.log("Error in getAllUsers", error);
+    }
+  };
+
+  useEffect(() => {
     getAllPosts();
-  }, [userId]);
+    //  to ignore the warning
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLikes = (postId, typeOfLike) => {
     // Doing this for front end change without waiting for backend updation
@@ -67,49 +88,56 @@ function PostsList(props) {
   return (
     <div>
       <div className="postlist_container_box long-box">
-        {postList.map((post, i) => (
-          <Box
-            className="post-container"
-            boxShadow={3}
-            borderRadius={5}
-            p={3}
-            key={i}
-            width={"95%"}
-          >
-            <div className="post-title">
-              <Avatar className="avatar" sx={{ bgcolor: deepPurple[500] }}>
-                {post._username ? post._username[0].toUpperCase() : null}
-              </Avatar>
-              {post._username}
-            </div>
-            <div className="post-content-box">{post._content}</div>
-            <div className="count-box">
-              <span>
-                {post._isUserLiked
-                  ? `You and ${post._likes - 1} more likes`
-                  : `${post._likes} likes`}
-              </span>
-            </div>
-            <div className="bottom-box">
-              <span
-                className={post._isUserLiked ? "unlike" : "like"}
-                onClick={() =>
-                  handleLikes(
-                    post._postId,
-                    post._isUserLiked ? "unlike" : "like"
-                  )
-                }
-              >
-                {post._isUserLiked ? "UnLike" : "Like"}
-              </span>
-              <span>Comment</span>
-              <span>Share</span>
-            </div>
-          </Box>
-        ))}
+        <InfiniteScroll
+          dataLength={postList.length}
+          next={getAllPosts}
+          hasMore={hasMore}
+          loader={<p>Loading...</p>}
+        >
+          {postList.map((post, i) => (
+            <Box
+              className="post-container"
+              boxShadow={3}
+              borderRadius={5}
+              p={3}
+              key={i}
+              width={"95%"}
+            >
+              <div className="post-title">
+                <Avatar className="avatar" sx={{ bgcolor: deepPurple[500] }}>
+                  {post._username ? post._username[0].toUpperCase() : null}
+                </Avatar>
+                {post._username}
+              </div>
+              <div className="post-content-box">{post._content}</div>
+              <div className="count-box">
+                <span>
+                  {post._isUserLiked
+                    ? `You and ${post._likes - 1} more likes`
+                    : `${post._likes} likes`}
+                </span>
+              </div>
+              <div className="bottom-box">
+                <span
+                  className={post._isUserLiked ? "unlike" : "like"}
+                  onClick={() =>
+                    handleLikes(
+                      post._postId,
+                      post._isUserLiked ? "unlike" : "like"
+                    )
+                  }
+                >
+                  {post._isUserLiked ? "UnLike" : "Like"}
+                </span>
+                <span>Comment</span>
+                <span>Share</span>
+              </div>
+            </Box>
+          ))}
+        </InfiniteScroll>
       </div>
     </div>
   );
 }
 
-export default PostsList;
+export default React.memo(PostsList);

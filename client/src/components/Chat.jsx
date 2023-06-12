@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../css/Chat.css";
 import io from "socket.io-client";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { websoketUrl } from "../utils/Constants";
+import { backendUrl, websoketUrl } from "../utils/Constants";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 export default function Chat({ recipient, setRecipient }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -37,6 +38,7 @@ export default function Chat({ recipient, setRecipient }) {
       await socket.emit("send_message", messageData);
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage("");
+      saveMessageToDb(messageData);
     }
   };
 
@@ -45,6 +47,37 @@ export default function Chat({ recipient, setRecipient }) {
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
+
+  const saveMessageToDb = (body) => {
+    try {
+      let commId = [body.recipient, body.author].sort().join("_"); //bala_hema
+      console.log("commId:", commId);
+      axios
+        .post(backendUrl + "chats/" + commId, body)
+        .then((res) => {
+          console.log("Response", res);
+        })
+        .catch((err) => {
+          console.log("Error in network call", err.message);
+        });
+    } catch (error) {
+      console.log("Error in saveMessageToDb", error);
+    }
+  };
+
+  const getChatMessageForUser = (body) => {
+    try {
+      let commId = [body.recipient, body.author].sort().join("_"); //bala_hema
+      axios
+        .get(backendUrl + "chats/" + commId)
+        .then((res) => res)
+        .catch((err) => {
+          console.log("Error in network call", err.message);
+        });
+    } catch (error) {
+      console.log("Error in getAllUsers", error);
+    }
+  };
 
   return (
     <div className="chat-window">
