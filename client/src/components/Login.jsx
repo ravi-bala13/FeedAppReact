@@ -48,8 +48,6 @@ export default function Login() {
           const { token, message } = res.data;
           dispatch(setToken(token));
           dispatch(setIsLoading(false));
-
-          document.cookie = `token=${token}; path=/;`;
           alert(message);
         })
         .catch((error) => {

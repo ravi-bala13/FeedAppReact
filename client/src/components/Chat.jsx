@@ -10,11 +10,7 @@ export default function Chat({ recipient, setRecipient }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
-  const { token } = useSelector((state) => state);
-  if (token) {
-    let decodeToken = JSON.parse(atob(token.split(".")[1]));
-    var { user_name: userName = null } = decodeToken.user;
-  }
+  const { userName } = useSelector((state) => state);
 
   const socket = io(websoketUrl, {
     query: {

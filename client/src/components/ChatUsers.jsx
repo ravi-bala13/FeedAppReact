@@ -8,11 +8,7 @@ import { useSelector } from "react-redux";
 export default function ChatUsers({ setRecipient }) {
   const [usersList, setUsersList] = useState(["bala"]);
 
-  const { token } = useSelector((state) => state);
-  if (token) {
-    let decodeToken = JSON.parse(atob(token.split(".")[1]));
-    var { user_name: username = null } = decodeToken.user;
-  }
+  const { userName } = useSelector((state) => state);
 
   const getAllUsers = () => {
     try {
@@ -29,7 +25,7 @@ export default function ChatUsers({ setRecipient }) {
   return (
     <Box borderRadius={8} boxShadow={3} className="chat_users_container">
       {usersList.map((ele, index) => {
-        if (username !== ele.user_name) {
+        if (userName !== ele.user_name) {
           return (
             <div
               className="each_chat_user"

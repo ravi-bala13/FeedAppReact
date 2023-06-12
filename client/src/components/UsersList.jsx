@@ -4,7 +4,6 @@ import { backendUrl } from "../utils/Constants";
 
 function UsersList() {
   const [users, setUsers] = useState([]);
-  console.log("users", users);
 
   useEffect(() => {
     getAllUsers();

@@ -17,16 +17,12 @@ function PostsList(props) {
     },
   ]);
 
-  const { token } = useSelector((state) => state);
-  if (token) {
-    let decodeToken = JSON.parse(atob(token.split(".")[1]));
-    var { _id: userId = null } = decodeToken.user;
-  }
+  const { userId } = useSelector((state) => state);
 
   useEffect(() => {
     const getAllPosts = () => {
       const url = `${backendUrl}posts/${userId}`;
-      console.log("url:", url);
+      console.log("Network call to:", url);
       try {
         axios.get(backendUrl + "posts/" + userId).then((res) => {
           setPostList(res.data);
@@ -54,6 +50,7 @@ function PostsList(props) {
 
     try {
       const url = `${backendUrl}posts/${typeOfLike}`;
+      console.log("Network call to:", url);
       const body = {
         postId,
         userId,

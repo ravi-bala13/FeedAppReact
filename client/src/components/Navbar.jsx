@@ -10,12 +10,7 @@ function NavbarTop() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { token } = useSelector((state) => state);
-
-  if (token) {
-    let decodeToken = JSON.parse(atob(token.split(".")[1]));
-    var { user_name: userName = null, role = null } = decodeToken.user;
-  }
+  const { token, userName, role } = useSelector((state) => state);
 
   const handleLogout = () => {
     navigate("/login");
