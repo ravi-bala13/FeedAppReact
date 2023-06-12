@@ -20,12 +20,14 @@ const postController = require("./controllers/post.controller");
 const userController = require("./controllers/user.controller");
 const loginAndSignUp = require("./controllers/login.controller");
 const likeController = require("./controllers/like.controller");
+const chatController = require("./controllers/chat.controller");
 const { FRONTEND_URL } = require("./utils/constants");
 
 app.use("/", loginAndSignUp);
 app.use("/", postController);
 app.use("/", userController);
 app.use("/", likeController);
+app.use("/", chatController);
 app.get("/home", (req, res) => res.status(200).send("welcome to home"));
 
 /**
