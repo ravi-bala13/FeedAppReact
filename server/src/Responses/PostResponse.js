@@ -4,6 +4,7 @@ class PostResponse {
   _content = null;
   _likes = 0;
   _isUserLiked = false;
+  _commentSec = false;
 
   //   constructor(username, content, likes, isUserLiked) {
   //     this.username = username;
@@ -51,6 +52,14 @@ class PostResponse {
 
   get isUserLiked() {
     return this._isUserLiked;
+  }
+
+  set commentSec(val) {
+    this._commentSec = val;
+  }
+
+  get commentSec() {
+    return this._commentSec;
   }
 }
 

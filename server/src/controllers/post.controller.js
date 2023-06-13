@@ -63,6 +63,7 @@ router.get("/posts/:loginedUserId", async (req, res) => {
       postResponse._content = post.content;
       postResponse._likes = post.likes;
       postResponse._isUserLiked = map.get(post._id.toString()) == loginedUserId;
+      postResponse._commentSec = post.comment_sec;
       postResponses.push(postResponse);
     });
 

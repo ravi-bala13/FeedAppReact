@@ -7,6 +7,7 @@ const postSchema = new mongoose.Schema({
     required: true,
   },
   content: { type: String, required: true, minlength: 1, maxlength: 300 },
+  comment_sec: { type: Boolean, default: false },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
   likes: { type: Number, default: 0, min: 0 },

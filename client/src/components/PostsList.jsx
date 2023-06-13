@@ -18,9 +18,9 @@ function PostsList() {
     //   _isUserLiked: false,
     // },
   ]);
-  console.log("postList:", postList);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const [comment, setComment] = useState("");
 
   const { userId } = useSelector((state) => state);
 
@@ -85,6 +85,21 @@ function PostsList() {
     }
   };
 
+  // const toggleCommentSec = (postId) => {
+  //   let temPostList = [...postList];
+
+  //   temPostList = temPostList.map((post) => {
+  //     if (postId === post._postId) {
+  //       post._commentSec = true;
+  //     }
+  //     return post;
+  //   });
+  //   console.log("temPostList:", temPostList);
+  //   setPostList(temPostList);
+  // };
+
+  const addComment = (postId, userId, comment) => {};
+
   return (
     <div>
       <div className="postlist_container_box long-box">
@@ -131,6 +146,19 @@ function PostsList() {
                 </span>
                 <span>Comment</span>
                 <span>Share</span>
+              </div>
+
+              <div className="comment-box">
+                <input
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  type="text"
+                />
+                <button
+                  onClick={() => addComment(post._postId, userId, comment)}
+                >
+                  Send
+                </button>
               </div>
             </Box>
           ))}
