@@ -15,7 +15,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading, setToken } from "../Redux/action";
 import { useNavigate } from "react-router-dom";
-import { backendUrl } from "../utils/Constants";
+import { backendUrl, loadingImageUrl } from "../utils/Constants";
 import GLogin from "./GLogin";
 
 export default function Login() {
@@ -61,7 +61,7 @@ export default function Login() {
           }
         });
     } catch (error) {
-      console.log("Error in handleSubmit", error);
+      console.log("Error in Network call while handleSubmit", error);
     }
     setUserDetails({
       email: "",
@@ -79,10 +79,7 @@ export default function Login() {
   if (isLoading) {
     return (
       <div className="loading-gif">
-        <img
-          src="https://media.tenor.com/hlKEXPvlX48AAAAi/loading-loader.gif"
-          alt=""
-        />
+        <img src={loadingImageUrl} alt="" />
       </div>
     );
   }

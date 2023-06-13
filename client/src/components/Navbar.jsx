@@ -21,8 +21,8 @@ function NavbarTop() {
     <>
       <Navbar bg="primary" variant="dark" sticky="top">
         <Container>
-          <img width={"40px"} src="logo.png" alt="" srcset="" />
-          <Navbar.Brand href="#home">FeedApp</Navbar.Brand>
+          <img width={"40px"} src="logo.png" alt="logo img" />
+          <Navbar.Brand href="/">FeedApp</Navbar.Brand>
           <Nav className="me-auto">
             {token ? (
               <>
