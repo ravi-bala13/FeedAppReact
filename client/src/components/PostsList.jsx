@@ -7,6 +7,7 @@ import { deepPurple } from "@mui/material/colors";
 import { useSelector } from "react-redux";
 
 import InfiniteScroll from "react-infinite-scroll-component";
+import CommentBox from "./CommentBox";
 
 function PostsList() {
   const [postList, setPostList] = useState([
@@ -20,7 +21,6 @@ function PostsList() {
   ]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
-  const [comment, setComment] = useState("");
 
   const { userId } = useSelector((state) => state);
 
@@ -85,20 +85,18 @@ function PostsList() {
     }
   };
 
-  // const toggleCommentSec = (postId) => {
-  //   let temPostList = [...postList];
+  const toggleCommentSec = (postId) => {
+    let temPostList = [...postList];
 
-  //   temPostList = temPostList.map((post) => {
-  //     if (postId === post._postId) {
-  //       post._commentSec = true;
-  //     }
-  //     return post;
-  //   });
-  //   console.log("temPostList:", temPostList);
-  //   setPostList(temPostList);
-  // };
-
-  const addComment = (postId, userId, comment) => {};
+    temPostList = temPostList.map((post) => {
+      if (postId === post._postId) {
+        post._commentSec = !post._commentSec;
+      }
+      return post;
+    });
+    console.log("temPostList:", temPostList);
+    setPostList(temPostList);
+  };
 
   return (
     <div>
@@ -144,22 +142,17 @@ function PostsList() {
                 >
                   {post._isUserLiked ? "UnLike" : "Like"}
                 </span>
-                <span>Comment</span>
+                <span onClick={() => toggleCommentSec(post._postId)}>
+                  Comment
+                </span>
                 <span>Share</span>
               </div>
 
-              <div className="comment-box">
-                <input
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  type="text"
-                />
-                <button
-                  onClick={() => addComment(post._postId, userId, comment)}
-                >
-                  Send
-                </button>
-              </div>
+              {post._commentSec ? (
+                <div>
+                  <CommentBox userId={userId} postId={post._postId} />
+                </div>
+              ) : null}
             </Box>
           ))}
         </InfiniteScroll>

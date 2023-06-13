@@ -6,6 +6,7 @@ import { backendUrl, websoketUrl } from "../utils/Constants";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import SendIcon from "@mui/icons-material/Send";
 
 export default function Chat({ recipient, setRecipient }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -58,7 +59,10 @@ export default function Chat({ recipient, setRecipient }) {
           console.log("Response", res);
         })
         .catch((err) => {
-          console.log("Error in network call", err.message);
+          console.log(
+            "Error in network call while saveMessageToDb",
+            err.message
+          );
         });
     } catch (error) {
       console.log("Error in saveMessageToDb", error);
@@ -75,7 +79,10 @@ export default function Chat({ recipient, setRecipient }) {
           setMessageList(messageList.reverse());
         })
         .catch((err) => {
-          console.log("Error in network call", err.message);
+          console.log(
+            "Error in network call while getChatMessageForUser",
+            err.message
+          );
         });
     } catch (error) {
       console.log("Error in getChatMessageForUser", error);
@@ -141,7 +148,9 @@ export default function Chat({ recipient, setRecipient }) {
                 event.key === "Enter" && sendMessage();
               }}
             />
-            <button onClick={sendMessage}>&#9658;</button>
+            <button onClick={sendMessage}>
+              <SendIcon />
+            </button>
           </div>
         </>
       ) : null}

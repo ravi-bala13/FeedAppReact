@@ -22,10 +22,15 @@ function PostForm() {
       content: formDetails.content,
     };
     try {
-      axios.post(backendUrl + "posts", body).then((res) => {
-        console.log("Response", res);
-        alert("Post created successfully");
-      });
+      axios
+        .post(backendUrl + "posts", body)
+        .then((res) => {
+          console.log("Response", res);
+          alert("Post created successfully");
+        })
+        .catch((err) => {
+          console.log("Error in network call while handleSubmit", err.message);
+        });
     } catch (error) {
       console.log("Error in handleSubmit", error);
     }
