@@ -85,3 +85,12 @@
     color: blue;
     cursor: pointer;
 }
+
+.comment-box {
+    height: 30px;
+    /* border: 1px solid rebeccapurple; */
+}
+
+.comment-box input {
+    width: 80%;
+}

@@ -7,11 +7,13 @@ import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
 import PrivateRoute from "./PrivateRoute";
+import FrontPage from "./FrontPage";
 
 export default function AllRoutes() {
   return (
     <div>
       <Routes>
+        <Route path="/" element={<FrontPage />} />
         <Route path="/userlist" element={<UsersList />} />
 
         <Route
