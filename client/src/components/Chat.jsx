@@ -65,19 +65,29 @@ export default function Chat({ recipient, setRecipient }) {
     }
   };
 
-  const getChatMessageForUser = (body) => {
+  const getChatMessageForUser = () => {
     try {
-      let commId = [body.recipient, body.author].sort().join("_"); //bala_hema
+      let commId = [userName, recipient].sort().join("_"); //bala_hema
       axios
         .get(backendUrl + "chats/" + commId)
-        .then((res) => res)
+        .then((res) => {
+          let messageList = res.data;
+          setMessageList(messageList.reverse());
+        })
         .catch((err) => {
           console.log("Error in network call", err.message);
         });
     } catch (error) {
-      console.log("Error in getAllUsers", error);
+      console.log("Error in getChatMessageForUser", error);
     }
   };
+
+  useEffect(() => {
+    if (recipient) {
+      getChatMessageForUser();
+    }
+    // eslint-disable-next-line
+  }, [recipient]);
 
   return (
     <div className="chat-window">
@@ -107,7 +117,11 @@ export default function Chat({ recipient, setRecipient }) {
                       </div>
                       <div className="message-meta">
                         <p id="time">{messageContent.time}</p>
-                        <p id="author">{messageContent.author}</p>
+                        <p id="author">
+                          {userName === messageContent.author
+                            ? "You"
+                            : messageContent.author}
+                        </p>
                       </div>
                     </div>
                   </div>
