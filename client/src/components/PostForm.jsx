@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { Box } from "@mui/material";
 import axios from "axios";
 import { backendUrl } from "../utils/Constants";
 import { useSelector } from "react-redux";
@@ -38,25 +39,27 @@ function PostForm() {
 
   return (
     <div className="container-box">
-      <Form onSubmit={handleSubmit}>
-        <h1>Create Post</h1>
+      <Box boxShadow={3} borderRadius={5} p={3} width={"95%"}>
+        <Form onSubmit={handleSubmit}>
+          <h1>Create Post</h1>
 
-        <Form.Group controlId="bio">
-          <Form.Label>Content</Form.Label>
-          <Form.Control
-            as="textarea"
-            name="content"
-            rows={3}
-            placeholder="Enter conent of the post"
-            value={formDetails.bio}
-            onChange={onChange}
-          />
-        </Form.Group>
+          <Form.Group controlId="bio">
+            <Form.Label>Content</Form.Label>
+            <Form.Control
+              as="textarea"
+              name="content"
+              rows={3}
+              placeholder="Enter conent of the post"
+              value={formDetails.bio}
+              onChange={onChange}
+            />
+          </Form.Group>
 
-        <Button variant="primary" type="submit" className="submit-btn">
-          Submit
-        </Button>
-      </Form>
+          <Button variant="primary" type="submit" className="submit-btn">
+            Submit
+          </Button>
+        </Form>
+      </Box>
     </div>
   );
 }
