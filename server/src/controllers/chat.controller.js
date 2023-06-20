@@ -17,7 +17,7 @@ router.post("/chats/:chatId", async (req, res) => {
 
 router.get("/chats/:chatId", async (req, res) => {
   try {
-    const chat = await Chat.find({ comm_id: req.params.chatId }).sort({
+    const chat = await Chat.find({ chat_id: req.params.chatId }).sort({
       created_at: "desc",
     });
     res.status(201).json(chat);
