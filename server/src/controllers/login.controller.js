@@ -10,7 +10,7 @@ require("dotenv").config();
 router.post(
   "/signup",
   // Validate the request body using express-validator
-  body("first_name").notEmpty(),
+  // body("first_name").notEmpty(),
   body("email").isEmail(),
   body("password").isLength({ min: 6 }),
   async (req, res) => {

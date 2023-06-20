@@ -1,9 +1,10 @@
-.comment-section {
-    /* border: 1px solid red; */
-}
+/* .comment-section {
+    border: 1px solid red;
+} */
 
 .comment-box {
     margin: 2px 0px;
+    font-size: 12px;
 }
 
 .each-comment {
@@ -11,7 +12,8 @@
     flex-direction: row;
     gap: 10px;
     align-items: center;
-    border-bottom: 1px solid #d3cdcd;
+    border-bottom: 1px solid rgb(238, 197, 93);
+    border-radius: 10px;
 }
 
 .comment-details {
@@ -22,7 +24,7 @@
 
 .comment-username {
     font-size: 12px;
-
+    color: rgb(97, 113, 234);
 }
 
 .time-diff {

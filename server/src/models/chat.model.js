@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ChatSchema = new mongoose.Schema({
-  comm_id: { type: String, require: true }, // Bala_hema, anbu_bala
+  chat_id: { type: String, require: true }, // Bala_hema, anbu_bala
   author: { type: String },
   recipient: { type: String },
   time: { type: String },

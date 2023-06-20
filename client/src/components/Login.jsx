@@ -20,11 +20,10 @@ import GLogin from "./GLogin";
 // import { Alert, AlertTitle } from "@mui/material";
 
 export default function Login() {
-  const { token } = useSelector((state) => state);
+  const { token, isLoading } = useSelector((state) => state);
   const navigate = useNavigate();
   const defaultTheme = createTheme();
 
-  const { isLoading } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const [userDetails, setUserDetails] = useState({

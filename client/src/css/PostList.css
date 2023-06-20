@@ -62,12 +62,13 @@
 }
 
 .count-box {
-    border-top: 1px solid #d3cdcd;
+    /* border-top: 1px solid #d3cdcd; */
     border-bottom: 1px solid #d3cdcd;
     display: flex;
     justify-content: left;
     color: #606165;
     font-size: 13px;
+    border-radius: 5px;
 }
 
 .bottom-box {
@@ -78,6 +79,7 @@
 
 .bottom-box span {
     cursor: pointer;
+    font-size: 14px;
 }
 
 .like {
