@@ -27,7 +27,7 @@ function AdminPostForm() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const createPost = (event) => {
     event.preventDefault();
     try {
       axios.post(backendUrl + "posts", formDetails).then((res) => {
@@ -35,13 +35,13 @@ function AdminPostForm() {
         alert("Post created successfully");
       });
     } catch (error) {
-      console.log("Error in handleSubmit", error);
+      console.log("Error in createPost", error);
     }
   };
 
   return (
     <div className="container-box">
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={createPost}>
         <h1>Create Post</h1>
         <Form.Group controlId="formPlace">
           {" "}
