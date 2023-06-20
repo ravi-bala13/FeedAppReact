@@ -25,6 +25,8 @@ export default function Chat({ recipient, setRecipient }) {
   });
 
   const sendMessage = async () => {
+    const hours = new Date().getHours();
+    const timePeriod = hours >= 0 && hours < 12 ? " AM" : " PM";
     if (currentMessage !== "") {
       const messageData = {
         author: userName,
@@ -33,7 +35,8 @@ export default function Chat({ recipient, setRecipient }) {
         time:
           new Date(Date.now()).getHours() +
           ":" +
-          new Date(Date.now()).getMinutes(),
+          new Date(Date.now()).getMinutes() +
+          timePeriod,
       };
 
       await socket.emit("send_message", messageData);
@@ -51,10 +54,10 @@ export default function Chat({ recipient, setRecipient }) {
 
   const saveMessageToDb = (body) => {
     try {
-      let commId = [body.recipient, body.author].sort().join("_"); //bala_hema
-      console.log("commId:", commId);
+      let chatId = [body.recipient, body.author].sort().join("_"); //bala_hema
+      console.log("chatId:", chatId);
       axios
-        .post(backendUrl + "chats/" + commId, body)
+        .post(backendUrl + "chats/" + chatId, body)
         .then((res) => {
           console.log("Response", res);
         })
@@ -71,9 +74,9 @@ export default function Chat({ recipient, setRecipient }) {
 
   const getChatMessageForUser = () => {
     try {
-      let commId = [userName, recipient].sort().join("_"); //bala_hema
+      let chatId = [userName, recipient].sort().join("_"); //bala_hema
       axios
-        .get(backendUrl + "chats/" + commId)
+        .get(backendUrl + "chats/" + chatId)
         .then((res) => {
           let messageList = res.data;
           setMessageList(messageList.reverse());

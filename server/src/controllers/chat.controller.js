@@ -3,9 +3,9 @@ const router = express.Router();
 const Chat = require("../models/chat.model");
 
 // Create a new message.
-router.post("/chats/:commId", async (req, res) => {
+router.post("/chats/:chatId", async (req, res) => {
   try {
-    req.body["comm_id"] = req.params.commId;
+    req.body["chat_id"] = req.params.chatId;
     const chat = new Chat(req.body);
     const savedchat = await chat.save();
     res.status(201).json(savedchat);
@@ -15,9 +15,9 @@ router.post("/chats/:commId", async (req, res) => {
   }
 });
 
-router.get("/chats/:commId", async (req, res) => {
+router.get("/chats/:chatId", async (req, res) => {
   try {
-    const chat = await Chat.find({ comm_id: req.params.commId }).sort({
+    const chat = await Chat.find({ comm_id: req.params.chatId }).sort({
       created_at: "desc",
     });
     res.status(201).json(chat);

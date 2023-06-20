@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,12 +10,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import GLogin from "./GLogin";
-import { backendUrl } from "../utils/Constants";
+import { backendUrl, loadingImageUrl } from "../utils/Constants";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading, setToken } from "../Redux/action";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const { token, isLoading } = useSelector((state) => state);
   const dispatch = useDispatch();
   const defaultTheme = createTheme();
 
@@ -68,6 +70,22 @@ export default function Signup() {
       password: "",
     });
   };
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (token) {
+      navigate("/home");
+    }
+  }, [token, navigate]);
+
+  // to show the loading image while loading
+  if (isLoading) {
+    return (
+      <div className="loading-gif">
+        <img src={loadingImageUrl} alt="" />
+      </div>
+    );
+  }
 
   return (
     <div className="user_form">
