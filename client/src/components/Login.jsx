@@ -17,6 +17,7 @@ import { setIsLoading, setToken } from "../Redux/action";
 import { useNavigate } from "react-router-dom";
 import { backendUrl, loadingImageUrl } from "../utils/Constants";
 import GLogin from "./GLogin";
+// import { Alert, AlertTitle } from "@mui/material";
 
 export default function Login() {
   const { token } = useSelector((state) => state);
@@ -86,6 +87,7 @@ export default function Login() {
 
   return (
     <>
+      {/* <Alert onClose={() => {}}>This is a success alert — check it out!</Alert> */}
       {token ? null : (
         <div className="user_form">
           <ThemeProvider theme={defaultTheme}>
