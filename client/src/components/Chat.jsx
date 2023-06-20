@@ -55,7 +55,7 @@ export default function Chat({ recipient, setRecipient }) {
   const saveMessageToDb = (body) => {
     try {
       let chatId = [body.recipient, body.author].sort().join("_"); //bala_hema
-      console.log("chatId:", chatId);
+      // console.log("saving message for chatId:", chatId);
       axios
         .post(backendUrl + "chats/" + chatId, body)
         .then((res) => {
@@ -75,10 +75,12 @@ export default function Chat({ recipient, setRecipient }) {
   const getChatMessageForUser = () => {
     try {
       let chatId = [userName, recipient].sort().join("_"); //bala_hema
+      // console.log("getting messages for chatId:", chatId);
       axios
         .get(backendUrl + "chats/" + chatId)
         .then((res) => {
           let messageList = res.data;
+          console.log("messageList:", messageList);
           setMessageList(messageList.reverse());
         })
         .catch((err) => {
