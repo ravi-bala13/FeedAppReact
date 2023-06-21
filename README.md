@@ -1,6 +1,6 @@
 # FeedAppReact
 
-This repo will have the code for a feed app which is a kind of Social media platform
+This repo will have the code for a feed app which is a kind of Social media platform. The Backend is using Nodejs, which is present in this repo only. but I have replicated all backend logic in the spring-boot application as well using Java. Here is the link (https://github.com/ravi-bala13/FeedReactAppJavaBackend)
 
 ## Installation and Run Locally
 
