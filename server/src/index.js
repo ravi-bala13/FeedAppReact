@@ -50,7 +50,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use("/users", userController) // /register /login
 
 passport.serializeUser(function ({ user, token }, done) {
   done(null, { user, token });
