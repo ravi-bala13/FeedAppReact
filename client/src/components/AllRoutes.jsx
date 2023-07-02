@@ -8,6 +8,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import PrivateRoute from "./PrivateRoute";
 import FrontPage from "./FrontPage";
+import NavbarCanvas from "./NavbarCanvas";
 
 export default function AllRoutes() {
   return (
@@ -28,6 +29,7 @@ export default function AllRoutes() {
         <Route path="/adminPostForm" element={<AdminPostForm />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/canvas" element={<NavbarCanvas />} />
       </Routes>
     </div>
   );
