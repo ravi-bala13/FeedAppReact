@@ -1,13 +1,13 @@
 import AllRoutes from "./components/AllRoutes";
 import "./App.css";
-import NavbarTop from "./components/Navbar";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import NavbarCanvas from "./components/NavbarCanvas";
 
 function App() {
   return (
     <div className="App">
-      <NavbarTop />
+      <NavbarCanvas />
       <AllRoutes />
     </div>
   );
