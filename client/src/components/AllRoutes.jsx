@@ -9,6 +9,7 @@ import Signup from "./Signup";
 import PrivateRoute from "./PrivateRoute";
 import FrontPage from "./FrontPage";
 import NavbarCanvas from "./NavbarCanvas";
+import ChatPage from "./ChatPage/ChatPage";
 
 export default function AllRoutes() {
   return (
@@ -30,6 +31,7 @@ export default function AllRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/canvas" element={<NavbarCanvas />} />
+        <Route path="/chatPage" element={<ChatPage />} />
       </Routes>
     </div>
   );

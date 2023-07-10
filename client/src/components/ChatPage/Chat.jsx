@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../css/Chat.css";
+import "../../css/Chat.css";
 import io from "socket.io-client";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { backendUrl, websoketUrl } from "../utils/Constants";
+import { backendUrl, websoketUrl } from "../../utils/Constants";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useSelector } from "react-redux";
 import axios from "axios";
