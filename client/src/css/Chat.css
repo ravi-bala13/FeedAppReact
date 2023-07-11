@@ -50,8 +50,6 @@
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: #ffffff;
-
-
 }
 
 .chat-window .chat-body .message-container::-webkit-scrollbar {
