@@ -9,6 +9,7 @@ export default function ChatPage() {
     <div className="chat_page">
       <div
         className={
+          // eslint-disable-next-line
           "left_side_div " + `${recipient ? "" : "make_visible_chat_user"}`
         }
       >

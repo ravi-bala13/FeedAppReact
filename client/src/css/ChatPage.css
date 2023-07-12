@@ -2,13 +2,6 @@
     display: flex;
 }
 
-.make_center {
-    /* border: 1px solid red; */
-    /* height: 540px; */
-}
-
-
-
 .make_center>.chat-window {
     position: relative;
     width: 90%;
