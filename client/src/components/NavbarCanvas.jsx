@@ -36,9 +36,11 @@ function NavbarCanvas() {
               <Navbar.Brand href="/">FeedApp</Navbar.Brand>
             </Navbar.Brand>
             <Navbar.Text className="navbar-canvas-chat-icon">
-              <Nav.Link href="/chatPage">
-                <BsFillChatLeftTextFill />
-              </Nav.Link>
+              {token ? (
+                <Nav.Link href="/chatPage">
+                  <BsFillChatLeftTextFill />
+                </Nav.Link>
+              ) : null}
             </Navbar.Text>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
