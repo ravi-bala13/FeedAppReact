@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { backendUrl } from "../utils/Constants";
+import { backendUrl } from "../../utils/Constants";
 import { Avatar, Box } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import { useSelector } from "react-redux";

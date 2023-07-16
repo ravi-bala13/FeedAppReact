@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PostsList from "./PostsList";
-import Chat from "./Chat";
+import Chat from "./ChatPage/Chat";
 import "../css/Home.css";
-import ChatUsers from "./ChatUsers";
+import ChatUsers from "./ChatPage/ChatUsers";
 import { useSelector } from "react-redux";
 
 export default function Home() {
