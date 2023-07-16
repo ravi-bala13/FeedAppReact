@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setToken, setUserId } from "../Redux/action";
 import { clearLocalStorage } from "../utils/localStorage";
+import { BsFillChatLeftTextFill } from "react-icons/bs";
 
 function NavbarCanvas() {
   const dispatch = useDispatch();
@@ -34,6 +35,11 @@ function NavbarCanvas() {
               <img width={"40px"} src="logo.png" alt="logo img" />
               <Navbar.Brand href="/">FeedApp</Navbar.Brand>
             </Navbar.Brand>
+            <Navbar.Text className="navbar-canvas-chat-icon">
+              <Nav.Link href="/chatPage">
+                <BsFillChatLeftTextFill />
+              </Nav.Link>
+            </Navbar.Text>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
