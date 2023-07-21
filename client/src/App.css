@@ -112,6 +112,20 @@ h1 {
 @media (max-width: 770px) {
   .navbar-canvas-chat-icon {
     display: block;
-    margin-left: 59%;
+    margin-left: 50%;
+  }
+}
+
+@media (max-width: 500px) {
+  .navbar-canvas-chat-icon {
+    display: block;
+    margin-left: 40%;
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar-canvas-chat-icon {
+    display: block;
+    margin-left: 20%;
   }
 }
