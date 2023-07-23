@@ -1,14 +1,23 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import { Box } from "@mui/material";
+import { useSelector } from "react-redux";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { backendUrl } from "../utils/Constants";
-import { useSelector } from "react-redux";
+import { TextareaAutosize } from "@mui/material";
 
 function PostForm() {
   const [formDetails, setFormDetails] = useState({
+    postTitle: "",
     content: "",
   });
+
+  const defaultTheme = createTheme();
 
   const { token } = useSelector((state) => state);
 
@@ -39,27 +48,58 @@ function PostForm() {
 
   return (
     <div className="container-box">
-      <Box boxShadow={3} borderRadius={5} p={3} width={"95%"}>
-        <Form onSubmit={handleSubmit}>
-          <h1>Create Post</h1>
+      <ThemeProvider theme={defaultTheme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography component="h1" variant="h5">
+              Login
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="tilte"
+                label="Title"
+                name="title"
+                autoFocus
+              />
+              <TextareaAutosize
+                placeholder="Type the content to post"
+                minRows={6}
+                cols={50}
+                autoFocus
+                onChange={onChange}
+                name="content"
+                style={{ padding: "10px" }}
+              />
 
-          <Form.Group controlId="bio">
-            <Form.Label>Content</Form.Label>
-            <Form.Control
-              as="textarea"
-              name="content"
-              rows={3}
-              placeholder="Enter conent of the post"
-              value={formDetails.bio}
-              onChange={onChange}
-            />
-          </Form.Group>
-
-          <Button variant="primary" type="submit" className="submit-btn">
-            Submit
-          </Button>
-        </Form>
-      </Box>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
+              >
+                Post
+              </Button>
+            </Box>
+          </Box>
+        </Container>
+      </ThemeProvider>
     </div>
   );
 }
